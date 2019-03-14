@@ -44,10 +44,11 @@ router.post('/register',(req,res) => {
             });
         }
     }).catch((err) => {
-
-    })
+        console.log(err);
+    });
 });
-
+//@route get api/users/login
+//@access Public
 
 
 module.exports = router;
