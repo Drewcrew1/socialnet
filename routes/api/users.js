@@ -7,6 +7,9 @@ const passport = require('passport');
 const User = require('../../models/User');
 const keys = require('../../config/keys');
 
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
+
 //@route get api/users/test
 //@access Public
 router.get('/test',(req,res) => {
@@ -16,11 +19,18 @@ router.get('/test',(req,res) => {
 //@route get api/users/register
 //@access Public
 router.post('/register',(req,res) => {
+    const {errors, isValid} = validateRegisterInput(req.body);
+
+    if(!isValid){
+        return res.status(400).json(errors);
+    }
+
     User.findOne({
         email: req.body.email
     }).then((user) => {
         if(user){
-            return res.status(400).json({email: 'email already exists'});
+            errors.email = 'Email Already Exists';
+            return res.status(400).json(errors);
         }else{
             const avatar = gravatar.url(req.body.email, {
                 s: '200',
@@ -54,6 +64,11 @@ router.post('/register',(req,res) => {
 //@access Public
 //changedkeyorsecret
 router.post('/login', (req,res) => {
+    const {errors, isValid} = validateLoginInput(req.body);
+
+    if(!isValid){
+        return res.status(400).json(errors);
+    }
    const email = req.body.email;
    const password = req.body.password;
 
