@@ -232,7 +232,7 @@ router.delete('/education/:edu_id',passport.authenticate('jwt', {session: false}
     });
 });
 
-
+//git merge 4
 //@route delete api/profile/
 //@access Private
 router.delete('/',passport.authenticate('jwt', {session: false}), (req,res) => {
