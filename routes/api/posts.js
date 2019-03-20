@@ -128,6 +128,7 @@ router.post('/comment/:id',passport.authenticate('jwt', {session: false}), (req,
        });
    })
 });
+//merge master 5
 //@route delete api/posts/comment/:id/:comment_id
 //@access Private
 router.delete('/comment/:id/:comment_id',passport.authenticate('jwt', {session: false}), (req,res) => {
