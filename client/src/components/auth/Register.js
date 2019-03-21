@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 class Register extends React.Component{
+
+    //merge 6
     constructor(){
         super();
         this.state= {
