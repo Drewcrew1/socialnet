@@ -9,6 +9,7 @@ class Landing extends React.Component{
             this.props.history.push('/dashboard');
         }
     }
+    //merge branch 7
     render(){
 
         return(
