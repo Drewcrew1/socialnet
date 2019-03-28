@@ -29,6 +29,7 @@ class CreateProfile extends React.Component {
         }
 
     }
+    //branch 8 merge
     componentWillReceiveProps(nextProps){
         if(nextProps.errors){
             this.setState({errors: nextProps.errors});
