@@ -2,11 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Spinner from '../common/Spinner';
 import {Link} from 'react-router-dom';
-import {getCurrentProfile} from '../../actions/profileActions';
+import {getCurrentProfile, deleteAccount} from '../../actions/profileActions';
+import ProfileActions from './ProfileActions';
 
  class Dashboard extends React.Component {
      componentDidMount(){
          this.props.getCurrentProfile();
+     }
+     onDelete = (e) => {
+         this.props.deleteAccount();
      }
     render(){
          const {user} = this.props.auth;
@@ -17,7 +21,13 @@ import {getCurrentProfile} from '../../actions/profileActions';
              dashboardContent = <Spinner />;
          }else{
              if(Object.keys(profile).length > 0){
-                 dashboardContent = <h4>display profile</h4>
+                 dashboardContent = <div>
+             <p className='lead text-muted'>Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
+                <ProfileActions />
+                     <div style={{marginBottom: '60px'}} >
+                        <button onClick={this.onDelete} className='btn btn-danger'>Delete my Account</button>
+                     </div>
+                 </div>
              }else {
                  dashboardContent = (
                    <div>
@@ -47,4 +57,4 @@ const mapStateToProps = (state) => ({
      profile: state.profile,
          auth: state.auth
 });
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile,deleteAccount})(Dashboard);
