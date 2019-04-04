@@ -8,6 +8,7 @@ import Experience from './Experience';
 import Education from './Education';
 
  class Dashboard extends React.Component {
+     //branch 10 merge10
      componentDidMount(){
          this.props.getCurrentProfile();
      }
